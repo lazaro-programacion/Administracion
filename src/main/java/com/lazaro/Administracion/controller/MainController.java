@@ -54,6 +54,7 @@ public class MainController {
                 break;
             case "%":
                 resultado=operando1 % operando2;
+                break;
             default:
                 return "No coinciden los operadores";
             
@@ -67,4 +68,3 @@ public class MainController {
     }
       
 
-    
