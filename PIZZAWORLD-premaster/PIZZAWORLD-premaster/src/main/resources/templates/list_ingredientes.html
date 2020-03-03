@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado Pizzas</title>
+    <style>
+        div {
+            width: 400px;
+            text-align: right;
+            padding-bottom: 10px;
+        }
+
+        input {
+            width: 160px;
+
+        }
+
+        #enviar {
+            width: 80px;
+            background-color: gray;
+            color: white;
+
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th {
+
+            border: 2px groove rgba(73, 108, 155, 0.87);
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            text-align: center;
+        }
+
+        td {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px groove gray;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <form action="/ingredientes" method="POST" class="ui form" style="width: 50%; margin-left: 10%;">
+       
+        <h2>
+            <div class="ui huge breadcrumb" style="width: 100%; margin-left: 10%;">
+                <a class="enlace"role="link" onclick="window.location='/api/pizzas'"> pizzas ></a>
+                <i class="right chevron icon divider"></i>
+                <a class="enlace"role="link" onclick="window.location='/api/pizzas/add'"> añadir pizzas ></a>
+                <i class="right chevron icon divider"></i>
+                <a class="enlace"role="link" onclick="window.location='/ingredientes'"> ingredientes ></a>
+                <i class="right chevron icon divider"></i>
+                <a class="enlace"role="link" onclick="window.location='/api/ingrediente'"> añadir ingredientes ></a>
+                <i class="right chevron icon divider"></i>
+                <div class="active section"></div>
+              </div>
+        </h2>
+
+        <h1 th:text="${pizza}">Nombre pizza  </h1>
+
+        <div style="width: 60%;">
+        </div>
+        <label>Añadir ingrediente:</label>
+        <select>
+            <option th:each="ingrediente:${ingrediente}"  th:text="${ingrediente.nombre}">
+            </option>''
+        </select>
+        <div class="ui divider">
+            <button class="ui button" type="submit">Aceptar</button>
+
+            <table id="list">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>ingrediente</th>
+                        <th>precio</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ingrediente : ${ingrediente}">
+                        <td th:text="${ingrediente.id}"></td>
+                        <td th:text="${ingrediente.nombre}"></td>
+                        <td th:text="${ingrediente.precio}"></td>
+                        <td>
+                            <a th:href="@{/delete/} + ${ingrediente.id}" th:text="'Eliminar'" class="btn btn-outline-danger"></a>
+                        </td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</body>
+
+</html>
